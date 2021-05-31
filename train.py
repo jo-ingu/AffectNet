@@ -4,7 +4,7 @@ import numpy as np
 import os
 import sys
 import csv
-from keras.applications import MobileNetV2
+from keras.applications import VGG16
 from keras.layers import Dense, Dropout, GlobalAveragePooling2D, MaxPooling2D
 from keras.models import Model
 from keras.optimizers import Adam
@@ -45,7 +45,7 @@ v_labels = np.load('Desktop/jo/AffectNet/validation_labels.npy')
 v_paths, v_labels, v_weights = process_data(v_paths, v_labels)
 
 # Model
-base_model = MobileNetV2(input_shape=(224,224,3), include_top=False, weights='imagenet')
+base_model = VGG16(input_shape=(224,224,3), include_top=False, weights='imagenet')
 x = base_model.output
 x = GlobalAveragePooling2D()(x)
 x = Dense(1024, activation='relu')(x)
